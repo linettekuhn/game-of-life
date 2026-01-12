@@ -45,8 +45,10 @@ export interface GameBoard {
   LivingNeighborCount: (row: number, col: number) => number;
   UpdateCounts: () => void;
   ClearUniverse: () => void;
-  mGameBoard: boolean[][];
-  mNeighborCounts: number[][];
+  getGameBoardPointer: () => number;
+  getNeighborCountsPointer: () => number;
+  getBoardSize: () => number;
+  setGameBoardFromPointer: (pointer: number, size: number) => void;
   mGenerationCount: number;
   mLivingCellCount: number;
   mSettings: GameSettings;
@@ -54,6 +56,10 @@ export interface GameBoard {
 
 export interface GameOfLifeModule {
   GameBoard: new () => GameBoard;
+  HEAPU8: Uint8Array;
+  HEAP32: Int32Array;
+  _malloc: (size: number) => number;
+  _free: (ptr: number) => void;
 }
 
 // tells interfaceScript that window.GameOfLifeModule exists
