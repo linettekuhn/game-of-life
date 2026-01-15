@@ -9,6 +9,7 @@ import { IoMdSkipForward } from "react-icons/io";
 import { IoMdTrash } from "react-icons/io";
 import IconButton from "./IconButton";
 import styles from "./GameOfLife.module.css";
+import MenuBar from "./MenuBar";
 
 export default function GameOfLife() {
   const { module, loading, error } = useGameOfLifeModule();
@@ -141,6 +142,7 @@ export default function GameOfLife() {
       {gameBoard && (
         <div className={styles.gameWindow}>
           <div className={styles.gameBoardWrapper}>
+            <MenuBar />
             <div className={styles.gameBoard}>
               <DrawingPanel
                 gameBoard={flatBoard}
