@@ -3,6 +3,12 @@ import { useGameOfLifeModule } from "../hooks/useGameOfLifeModule";
 import type { GameBoard } from "../GameOfLifeModule";
 import DrawingPanel from "./DrawingPanel";
 import GameStatus from "./GameStatus";
+import { IoMdPause } from "react-icons/io";
+import { IoMdPlay } from "react-icons/io";
+import { IoMdSkipForward } from "react-icons/io";
+import { IoMdTrash } from "react-icons/io";
+import IconButton from "./IconButton";
+import styles from "./GameOfLife.module.css";
 
 export default function GameOfLife() {
   const { module, loading, error } = useGameOfLifeModule();
@@ -132,38 +138,33 @@ export default function GameOfLife() {
   return (
     <div>
       <button onClick={initializeBoard}>start game</button>
-      <button onClick={handleRunGame}>run</button>
-      <button onClick={handleNextGeneration}>next</button>
-      <button onClick={handlePauseGame}>pause</button>
-      <button onClick={handleStopGame}>stop</button>
       {gameBoard && (
-        <div>
-          <div
-            style={{
-              flex: 1,
-              border: "2px solid #333",
-              borderRadius: "4px",
-              overflow: "hidden",
-              resize: "both",
-              minWidth: "200px",
-              minHeight: "200px",
-              maxWidth: "100%",
-              maxHeight: "100%",
-            }}
-          >
-            <DrawingPanel
-              gameBoard={flatBoard}
-              setGameBoard={handleBoardChange}
-              neighborCounts={flatNeighbors}
-              settings={gameBoard.mSettings}
-              refresh={refreshBoards}
+        <div className={styles.gameWindow}>
+          <div className={styles.gameBoardWrapper}>
+            <div className={styles.gameBoard}>
+              <DrawingPanel
+                gameBoard={flatBoard}
+                setGameBoard={handleBoardChange}
+                neighborCounts={flatNeighbors}
+                settings={gameBoard.mSettings}
+                refresh={refreshBoards}
+              />
+            </div>
+            <GameStatus
+              gameBoard={gameBoard}
+              isRunning={isRunning}
+              refreshTrigger={refreshCount}
             />
           </div>
-          <GameStatus
-            gameBoard={gameBoard}
-            isRunning={isRunning}
-            refreshTrigger={refreshCount}
-          />
+          <div className={styles.controls}>
+            <IconButton IconComponent={IoMdPlay} onClick={handleRunGame} />
+            <IconButton
+              IconComponent={IoMdSkipForward}
+              onClick={handleNextGeneration}
+            />
+            <IconButton IconComponent={IoMdPause} onClick={handlePauseGame} />
+            <IconButton IconComponent={IoMdTrash} onClick={handleStopGame} />
+          </div>
         </div>
       )}
     </div>

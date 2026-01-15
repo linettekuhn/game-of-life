@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { GameBoard } from "../GameOfLifeModule";
+import styles from "./GameStatus.module.css";
 
 type Props = {
   gameBoard: GameBoard | null;
@@ -36,12 +37,7 @@ export default function GameStatus({
   if (!gameBoard) return null;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-evenly",
-      }}
-    >
+    <div className={styles.statusWrapper}>
       <p>Generation No. {generationCount}</p>
       <p>Living Cell Count: {livingCellCount}</p>
     </div>

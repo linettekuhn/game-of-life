@@ -1,68 +1,266 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Cal+Sans&family=Darker+Grotesque:wght@300..900&family=East+Sea+Dokdo&family=Faculty+Glyphic&family=Homemade+Apple&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Onest:wght@100..900&family=Parkinsans:wght@300..800&family=Unbounded:wght@200..900&display=swap");
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+/* Prevent font size inflation */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 }
-a:hover {
-  color: #535bf2;
+
+/* Remove default margin in favour of better control in authored CSS */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: var(--space-2xs) 0;
+}
+
+/* Center headers */
+h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs-s);
+  flex-direction: column;
+  text-align: center;
+}
+
+/* Set core body defaults */
+html,
+#root {
+  min-height: 100%;
+  overscroll-behavior: contain;
+  overflow-x: hidden;
 }
 
 body {
-  margin: 0;
+  height: auto;
   display: flex;
+  flex-direction: column;
   place-items: center;
-  min-width: 320px;
+  margin: 0;
+  padding: 0;
+  font-family: "Onest", sans-serif;
+  font-weight: 400;
+  width: 100vw;
   min-height: 100vh;
 }
 
+main {
+  width: 100vw;
+  min-height: 100vh;
+  flex: 1;
+  padding: var(--space-4xl) var(--space-2xs) var(--space-m) var(--space-2xs);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: hidden;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
 h1 {
-  font-size: 3.2em;
+  font-weight: 700;
+  margin-top: var(--space-m);
+}
+
+h2 {
+  font-weight: 600;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+}
+
+/* Class to bold and italicize text */
+.bold {
+  font-weight: 800;
+}
+
+.italic {
+  font-style: italic;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
   line-height: 1.1;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}
+
+/* Fluid spacing scale generated with Utopia */
+/* @link https://utopia.fyi/space/calculator?c=320,12,1.2,2560,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|1.7|2|2.7|3.3|4|5|6,s-l&g=s,l,xl,12 */
+
+:root {
+  /* Space 3xs: 3px → 5px */
+  --space-3xs: clamp(0.1875rem, 0.1696rem + 0.0893vw, 0.3125rem);
+  /* Space 2xs: 6px → 10px */
+  --space-2xs: clamp(0.375rem, 0.3393rem + 0.1786vw, 0.625rem);
+  /* Space xs: 9px → 15px */
+  --space-xs: clamp(0.5625rem, 0.5089rem + 0.2679vw, 0.9375rem);
+  /* Space s: 12px → 20px */
+  --space-s: clamp(0.75rem, 0.6786rem + 0.3571vw, 1.25rem);
+  /* Font size: 16px → 24px */
+  --font-default: clamp(1rem, 0.9286rem + 0.3571vw, 1.5rem);
+  /* Space m: 18px → 30px */
+  --space-m: clamp(1.125rem, 1.0179rem + 0.5357vw, 1.875rem);
+  /* Space l: 20px → 34px */
+  --space-l: clamp(1.25rem, 1.125rem + 0.625vw, 2.125rem);
+  /* Space xl: 24px → 40px */
+  --space-xl: clamp(1.5rem, 1.3571rem + 0.7143vw, 2.5rem);
+  /* Space 2xl: 32px → 54px */
+  --space-2xl: clamp(2rem, 1.8036rem + 0.9821vw, 3.375rem);
+  /* Space 3xl: 40px → 66px */
+  --space-3xl: clamp(2.5rem, 2.2679rem + 1.1607vw, 4.125rem);
+  /* Space 4xl: 48px → 80px */
+  --space-4xl: clamp(3rem, 2.7143rem + 1.4286vw, 5rem);
+  /* Space 5xl: 60px → 100px */
+  --space-5xl: clamp(3.75rem, 3.3929rem + 1.7857vw, 6.25rem);
+  /* Space 6xl: 72px → 120px */
+  --space-6xl: clamp(4.5rem, 4.0714rem + 2.1429vw, 7.5rem);
+
+  /* One-up pairs */
+  /* Space 3xs-2xs: 3px → 10px */
+  --space-3xs-2xs: clamp(0.1875rem, 0.125rem + 0.3125vw, 0.625rem);
+  /* Space 2xs-xs: 6px → 15px */
+  --space-2xs-xs: clamp(0.375rem, 0.2946rem + 0.4018vw, 0.9375rem);
+  /* Space xs-s: 9px → 20px */
+  --space-xs-s: clamp(0.5625rem, 0.4643rem + 0.4911vw, 1.25rem);
+  /* Space s-m: 12px → 30px */
+  --space-s-m: clamp(0.75rem, 0.5893rem + 0.8036vw, 1.875rem);
+  /* Space m-l: 18px → 34px */
+  --space-m-l: clamp(1.125rem, 0.9821rem + 0.7143vw, 2.125rem);
+  /* Space l-xl: 20px → 40px */
+  --space-l-xl: clamp(1.25rem, 1.0714rem + 0.8929vw, 2.5rem);
+  /* Space xl-2xl: 24px → 54px */
+  --space-xl-2xl: clamp(1.5rem, 1.2321rem + 1.3393vw, 3.375rem);
+  /* Space 2xl-3xl: 32px → 66px */
+  --space-2xl-3xl: clamp(2rem, 1.6964rem + 1.5179vw, 4.125rem);
+  /* Space 3xl-4xl: 40px → 80px */
+  --space-3xl-4xl: clamp(2.5rem, 2.1429rem + 1.7857vw, 5rem);
+  /* Space 4xl-5xl: 48px → 100px */
+  --space-4xl-5xl: clamp(3rem, 2.5357rem + 2.3214vw, 6.25rem);
+  /* Space 5xl-6xl: 60px → 120px */
+  --space-5xl-6xl: clamp(3.75rem, 3.2143rem + 2.6786vw, 7.5rem);
+
+  /* Custom pairs */
+  /* Space s-l: 12px → 34px */
+  --space-s-l: clamp(0.75rem, 0.5536rem + 0.9821vw, 2.125rem);
+}
+
+/* Font sizes */
+p,
+a,
+li,
+input,
+label,
+button {
+  font-size: var(--font-default);
+}
+
+h6 {
+  font-size: var(--space-m);
+}
+
+h5 {
+  font-size: var(--space-l);
+}
+
+h4 {
+  font-size: var(--space-xl);
+}
+
+h3 {
+  font-size: var(--space-2xl);
+}
+
+h2 {
+  font-size: calc(var(--space-2xl) * var(--font-size-adjust));
+}
+
+h1 {
+  font-size: calc(var(--space-3xl) * var(--font-size-adjust));
+}
+
+@media (min-width: 700px) {
+  h1 {
+    flex-direction: row;
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+
+  main {
+    padding: 0 var(--space-3xl);
+    padding-top: var(--space-4xl);
   }
 }
