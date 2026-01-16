@@ -22,7 +22,9 @@ export default function RandomizeModal({ onRandomize, onCancel }: Props) {
       title="Randomize Game Board"
       footer={footer}
     >
-      <caption>Default seed is current Unix timestamp (seconds)</caption>
+      <p className="caption">
+        Default seed is current Unix timestamp (seconds)
+      </p>
       <div className={styles.inputWrapper}>
         <label htmlFor="seed">Choose a seed</label>
         <input
