@@ -134,7 +134,7 @@ export default function DrawingPanel({
         ctx.fillStyle = isAlive ? livingCellColor : deadCellColor;
 
         // set stroke color for grid lines
-        if (settings.isShowGridChecked) {
+        if (settings.showGrid) {
           ctx.strokeStyle = gridLineColor;
           ctx.lineWidth = 1;
         } else {
@@ -156,7 +156,7 @@ export default function DrawingPanel({
         );
 
         // show neighbor count if enabled
-        if (settings.isNeighborCountChecked) {
+        if (settings.showNeighborCount) {
           const neighbors = neighborCounts[flatIndex];
           if (neighbors > 0) {
             const fontSize = Math.min(cellWidth, cellHeight) / 2;
@@ -178,7 +178,7 @@ export default function DrawingPanel({
     }
 
     // draw thick grid lines (every 10 squares)
-    if (settings.isShowThickGridChecked) {
+    if (settings.showThickGrid) {
       const solidLines = Math.floor(settings.gridSize / 10);
       ctx.strokeStyle = gridLineColor;
       ctx.lineWidth = 2;
@@ -199,13 +199,13 @@ export default function DrawingPanel({
     }
 
     // display HUD if enabled
-    if (settings.isHUDChecked) {
+    if (settings.showHUD) {
       const fontSize = Math.min(canvasSize.width, canvasSize.height) / 35;
       ctx.font = `${fontSize}px Arial`;
       ctx.fillStyle = "red";
 
       const hudText = [
-        `Boundary type: ${settings.isToroidalChecked ? "Toroidal" : "Finite"}`,
+        `Boundary type: ${settings.isToroidal ? "Toroidal" : "Finite"}`,
         `Game Board Size: ${settings.gridSize} x ${settings.gridSize}`,
         `Timer Interval: ${settings.interval} ms`,
         `Window Size: ${settings.windowWidth} x ${settings.windowHeight}`,

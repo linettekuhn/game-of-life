@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useGameOfLifeModule } from "../hooks/useGameOfLifeModule";
-import type { GameBoard } from "../GameOfLifeModule";
+import type { GameBoard, GameSettings } from "../GameOfLifeModule";
 import DrawingPanel from "./DrawingPanel";
 import GameStatus from "./GameStatus";
 import { IoMdPause } from "react-icons/io";
@@ -14,6 +14,7 @@ import MenuBar from "./MenuBar";
 export default function GameOfLife() {
   const { module, loading, error } = useGameOfLifeModule();
   const [gameBoard, setGameBoard] = useState<GameBoard | null>(null);
+  const [settings, setSettings] = useState<GameSettings | null>(null);
   const [flatBoard, setFlatBoard] = useState<Uint8Array>(new Uint8Array(0));
   const [flatNeighbors, setFlatNeighbors] = useState<Int32Array>(
     new Int32Array(0)
@@ -93,6 +94,7 @@ export default function GameOfLife() {
       const board = new module.GameBoard();
       board.InitializeGameBoard();
       setGameBoard(board);
+      setSettings(board.mSettings);
 
       // initialize boards thru pointers
       const pointer = board.getGameBoardPointer();
@@ -113,9 +115,15 @@ export default function GameOfLife() {
     }
   };
 
+  const updateGameSettings = (newSettings: GameSettings) => {
+    setSettings(newSettings);
+    if (gameBoard) {
+      gameBoard.setGameSettings(newSettings);
+    }
+  };
+
   useEffect(() => {
     if (isRunning) {
-      console.log(isRunning);
       intervalId.current = setInterval(() => {
         handleNextGeneration();
       }, 200);
@@ -139,16 +147,19 @@ export default function GameOfLife() {
   return (
     <div>
       <button onClick={initializeBoard}>start game</button>
-      {gameBoard && (
+      {gameBoard && settings && (
         <div className={styles.gameWindow}>
           <div className={styles.gameBoardWrapper}>
-            <MenuBar />
+            <MenuBar
+              settings={settings}
+              onSettingsChange={updateGameSettings}
+            />
             <div className={styles.gameBoard}>
               <DrawingPanel
                 gameBoard={flatBoard}
                 setGameBoard={handleBoardChange}
                 neighborCounts={flatNeighbors}
-                settings={gameBoard.mSettings}
+                settings={settings}
                 refresh={refreshBoards}
               />
             </div>

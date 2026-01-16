@@ -2,18 +2,20 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./MenuBar.module.css";
 import { IoMdArrowDropright, IoMdCheckmark } from "react-icons/io";
 import type { MenuItem } from "../types";
+import type { GameSettings } from "../GameOfLifeModule";
 
-export default function MenuBar() {
+export default function MenuBar({
+  settings,
+  onSettingsChange,
+}: {
+  settings: GameSettings;
+  onSettingsChange: (newSettings: GameSettings) => void;
+}) {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [hoveredSubmenu, setHoveredSubmenu] = useState<number | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
-  const [checkedOptions, setCheckedOptions] = useState({
-    showHUD: true,
-    showNeighborCount: true,
-    viewGrid: true,
-    viewLargeGrid: true,
-    boundaryType: "finite",
-  });
+
+  const [localSettings, setLocalSettings] = useState(settings);
 
   // close menu on click outside
   useEffect(() => {
@@ -32,11 +34,14 @@ export default function MenuBar() {
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
 
-  const setOption = (key: string, value: string | boolean) => {
-    setCheckedOptions((prev) => ({
-      ...prev,
+  const setOption = (key: string, value: boolean) => {
+    const newSettings = {
+      ...localSettings,
       [key]: value,
-    }));
+    };
+    setLocalSettings(newSettings);
+    // update parent settings on any change
+    onSettingsChange(newSettings);
   };
 
   const menuItems: { [menuName: string]: MenuItem[] } = {
@@ -71,10 +76,9 @@ export default function MenuBar() {
       {
         label: "Display HUD",
         type: "checkbox",
-        checked: checkedOptions.showHUD,
+        checked: localSettings.showHUD,
         action: () => {
-          console.log("Display HUD");
-          setOption("showHUD", !checkedOptions.showHUD);
+          setOption("showHUD", !localSettings.showHUD);
         },
       },
       {
@@ -84,19 +88,17 @@ export default function MenuBar() {
           {
             label: "Finite",
             type: "radio",
-            checked: checkedOptions.boundaryType === "finite",
+            checked: !localSettings.isToroidal,
             action: () => {
-              console.log("Finite");
-              setOption("boundaryType", "finite");
+              setOption("isToroidal", false);
             },
           },
           {
             label: "Torodial",
             type: "radio",
-            checked: checkedOptions.boundaryType === "torodial",
+            checked: localSettings.isToroidal,
             action: () => {
-              console.log("Torodial");
-              setOption("boundaryType", "torodial");
+              setOption("isToroidal", true);
             },
           },
         ],
@@ -104,10 +106,9 @@ export default function MenuBar() {
       {
         label: "Display Neighbors",
         type: "checkbox",
-        checked: checkedOptions.showNeighborCount,
+        checked: localSettings.showNeighborCount,
         action: () => {
-          console.log("Display Neighbors");
-          setOption("showNeighborCount", !checkedOptions.showNeighborCount);
+          setOption("showNeighborCount", !localSettings.showNeighborCount);
         },
       },
 
@@ -118,19 +119,17 @@ export default function MenuBar() {
           {
             label: "10x10",
             type: "checkbox",
-            checked: checkedOptions.viewLargeGrid,
+            checked: localSettings.showThickGrid,
             action: () => {
-              console.log("10x10");
-              setOption("viewLargeGrid", !checkedOptions.viewLargeGrid);
+              setOption("showThickGrid", !localSettings.showThickGrid);
             },
           },
           {
             label: "1x1",
             type: "checkbox",
-            checked: checkedOptions.viewGrid,
+            checked: localSettings.showGrid,
             action: () => {
-              console.log("1x1");
-              setOption("viewGrid", !checkedOptions.viewGrid);
+              setOption("showGrid", !localSettings.showGrid);
             },
           },
         ],
@@ -183,6 +182,7 @@ export default function MenuBar() {
         onMouseEnter={() => hasSubmenu && setHoveredSubmenu(index)}
         onMouseLeave={() => hasSubmenu && !isSubMenu && setHoveredSubmenu(null)}
         className={styles.menuItemWrapper}
+        key={menuItem.label}
       >
         <button
           onClick={() => handleMenuItemClick(menuItem)}

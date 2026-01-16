@@ -31,11 +31,11 @@ export interface GameSettings {
   windowWidth: number;
   windowHeight: number;
 
-  isHUDChecked: boolean;
-  isNeighborCountChecked: boolean;
-  isToroidalChecked: boolean;
-  isShowGridChecked: boolean;
-  isShowThickGridChecked: boolean;
+  showHUD: boolean;
+  showNeighborCount: boolean;
+  isToroidal: boolean;
+  showGrid: boolean;
+  showThickGrid: boolean;
 }
 
 export interface GameBoard {
@@ -49,6 +49,7 @@ export interface GameBoard {
   getNeighborCountsPointer: () => number;
   getBoardSize: () => number;
   setGameBoardFromPointer: (pointer: number, size: number) => void;
+  setGameSettings: (settings: GameSettings) => void;
   mGenerationCount: number;
   mLivingCellCount: number;
   mSettings: GameSettings;
