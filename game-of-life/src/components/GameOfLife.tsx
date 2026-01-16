@@ -85,7 +85,8 @@ export default function GameOfLife() {
     setRunning(false);
     if (gameBoard) {
       gameBoard.ClearUniverse();
-      initializeBoard();
+      refreshBoards();
+      setRefreshCount((prev) => prev + 1);
     }
   };
 
@@ -116,9 +117,14 @@ export default function GameOfLife() {
   };
 
   const updateGameSettings = (newSettings: GameSettings) => {
+    const oldGridSize = settings?.gridSize;
     setSettings(newSettings);
     if (gameBoard) {
       gameBoard.setGameSettings(newSettings);
+      if (oldGridSize !== newSettings.gridSize) {
+        refreshBoards();
+        setRefreshCount((prev) => prev + 1);
+      }
     }
   };
 
@@ -126,7 +132,7 @@ export default function GameOfLife() {
     if (isRunning) {
       intervalId.current = setInterval(() => {
         handleNextGeneration();
-      }, 200);
+      }, settings?.interval || 200);
     } else {
       if (intervalId.current) {
         clearInterval(intervalId.current);
@@ -138,7 +144,7 @@ export default function GameOfLife() {
         clearInterval(intervalId.current);
       }
     };
-  }, [isRunning, handleNextGeneration]);
+  }, [isRunning, handleNextGeneration, settings?.interval]);
 
   if (!module) return <div>Module not loaded</div>;
   if (loading) return <div>Loading Game of Life...</div>;

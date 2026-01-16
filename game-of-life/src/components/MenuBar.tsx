@@ -3,6 +3,7 @@ import styles from "./MenuBar.module.css";
 import { IoMdArrowDropright, IoMdCheckmark } from "react-icons/io";
 import type { MenuItem } from "../types";
 import type { GameSettings } from "../GameOfLifeModule";
+import SettingsModal from "./SettingsModal";
 
 export default function MenuBar({
   settings,
@@ -16,6 +17,7 @@ export default function MenuBar({
   const menuRef = useRef<HTMLDivElement>(null);
 
   const [localSettings, setLocalSettings] = useState(settings);
+  const [openModal, setOpenModal] = useState(false);
 
   // close menu on click outside
   useEffect(() => {
@@ -82,28 +84,6 @@ export default function MenuBar({
         },
       },
       {
-        label: "Boundary Type",
-        type: "submenu",
-        submenu: [
-          {
-            label: "Finite",
-            type: "radio",
-            checked: !localSettings.isToroidal,
-            action: () => {
-              setOption("isToroidal", false);
-            },
-          },
-          {
-            label: "Torodial",
-            type: "radio",
-            checked: localSettings.isToroidal,
-            action: () => {
-              setOption("isToroidal", true);
-            },
-          },
-        ],
-      },
-      {
         label: "Display Neighbors",
         type: "checkbox",
         checked: localSettings.showNeighborCount,
@@ -111,7 +91,6 @@ export default function MenuBar({
           setOption("showNeighborCount", !localSettings.showNeighborCount);
         },
       },
-
       {
         label: "View Grid Lines",
         type: "submenu",
@@ -134,6 +113,28 @@ export default function MenuBar({
           },
         ],
       },
+      {
+        label: "Boundary Type",
+        type: "submenu",
+        submenu: [
+          {
+            label: "Finite",
+            type: "radio",
+            checked: !localSettings.isToroidal,
+            action: () => {
+              setOption("isToroidal", false);
+            },
+          },
+          {
+            label: "Torodial",
+            type: "radio",
+            checked: localSettings.isToroidal,
+            action: () => {
+              setOption("isToroidal", true);
+            },
+          },
+        ],
+      },
     ],
 
     Options: [
@@ -141,6 +142,7 @@ export default function MenuBar({
         label: "Settings",
         action: () => {
           console.log("Settings");
+          setOpenModal(true);
         },
       },
       {
@@ -232,6 +234,17 @@ export default function MenuBar({
           </div>
         ))}
       </div>
+      {openModal && (
+        <SettingsModal
+          settings={localSettings}
+          onSave={(newSettings: GameSettings) => {
+            setOpenModal(false);
+            onSettingsChange(newSettings);
+            setLocalSettings(newSettings);
+          }}
+          onCancel={() => setOpenModal(false)}
+        />
+      )}
     </div>
   );
 }

@@ -208,7 +208,6 @@ export default function DrawingPanel({
         `Boundary type: ${settings.isToroidal ? "Toroidal" : "Finite"}`,
         `Game Board Size: ${settings.gridSize} x ${settings.gridSize}`,
         `Timer Interval: ${settings.interval} ms`,
-        `Window Size: ${settings.windowWidth} x ${settings.windowHeight}`,
       ];
 
       const lineHeight = fontSize * 1.2;
