@@ -2,6 +2,7 @@ import tinycolor from "tinycolor2";
 import type { GameSettings } from "../GameOfLifeModule";
 import styles from "./SettingsModal.module.css";
 import { useState } from "react";
+import Modal from "./Modal";
 type Props = {
   onSave: (newSettings: GameSettings) => void;
   onCancel: () => void;
@@ -72,8 +73,20 @@ export default function SettingsModal({ onSave, onCancel, settings }: Props) {
     onSave(newSettings);
   };
 
+  const footer = (
+    <div className={styles.formControls}>
+      <button onClick={saveSettings}>Save</button>
+      <button onClick={onCancel}>Cancel</button>
+    </div>
+  );
+
   return (
-    <div className={styles.backdrop}>
+    <Modal
+      isOpen={true}
+      onClose={onCancel}
+      title="Edit Game Settings"
+      footer={footer}
+    >
       <form action="" className={styles.settingsForm}>
         <div className={styles.settingWrapper}>
           <input
@@ -163,11 +176,7 @@ export default function SettingsModal({ onSave, onCancel, settings }: Props) {
           (ms)
           <label htmlFor="interval">Timer Interval </label>
         </div>
-        <div className={styles.formControls}>
-          <button onClick={saveSettings}>Save</button>
-          <button onClick={onCancel}>Cancel</button>
-        </div>
       </form>
-    </div>
+    </Modal>
   );
 }

@@ -4,20 +4,25 @@ import { IoMdArrowDropright, IoMdCheckmark } from "react-icons/io";
 import type { MenuItem } from "../types";
 import type { GameSettings } from "../GameOfLifeModule";
 import SettingsModal from "./SettingsModal";
+import RandomizeModal from "./RandomizeModal";
+
+type ModalType = "settings" | "randomize" | null;
 
 export default function MenuBar({
   settings,
   onSettingsChange,
+  onRandomize,
 }: {
   settings: GameSettings;
   onSettingsChange: (newSettings: GameSettings) => void;
+  onRandomize: (seed: number) => void;
 }) {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [hoveredSubmenu, setHoveredSubmenu] = useState<number | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const [localSettings, setLocalSettings] = useState(settings);
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState<ModalType>(null);
 
   // close menu on click outside
   useEffect(() => {
@@ -47,33 +52,6 @@ export default function MenuBar({
   };
 
   const menuItems: { [menuName: string]: MenuItem[] } = {
-    File: [
-      {
-        label: "New",
-        action: () => {
-          console.log("New");
-        },
-      },
-      {
-        label: "Open",
-        action: () => {
-          console.log("Open");
-        },
-      },
-      {
-        label: "Import",
-        action: () => {
-          console.log("Import");
-        },
-      },
-      {
-        label: "Save",
-        action: () => {
-          console.log("Save");
-        },
-      },
-    ],
-
     View: [
       {
         label: "Display HUD",
@@ -142,13 +120,14 @@ export default function MenuBar({
         label: "Settings",
         action: () => {
           console.log("Settings");
-          setOpenModal(true);
+          setOpenModal("settings");
         },
       },
       {
         label: "Randomize Board",
         action: () => {
           console.log("Randomize Board");
+          setOpenModal("randomize");
         },
       },
     ],
@@ -234,15 +213,24 @@ export default function MenuBar({
           </div>
         ))}
       </div>
-      {openModal && (
+      {openModal === "settings" && (
         <SettingsModal
           settings={localSettings}
           onSave={(newSettings: GameSettings) => {
-            setOpenModal(false);
+            setOpenModal(null);
             onSettingsChange(newSettings);
             setLocalSettings(newSettings);
           }}
-          onCancel={() => setOpenModal(false)}
+          onCancel={() => setOpenModal(null)}
+        />
+      )}
+      {openModal === "randomize" && (
+        <RandomizeModal
+          onRandomize={(seed: number) => {
+            setOpenModal(null);
+            onRandomize(seed);
+          }}
+          onCancel={() => setOpenModal(null)}
         />
       )}
     </div>

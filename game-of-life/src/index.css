@@ -191,33 +191,81 @@ textarea:not([rows]) {
   /* Space 6xl: 72px → 120px */
   --space-6xl: clamp(4.5rem, 4.0714rem + 2.1429vw, 7.5rem);
 
-  /* One-up pairs */
-  /* Space 3xs-2xs: 3px → 10px */
-  --space-3xs-2xs: clamp(0.1875rem, 0.125rem + 0.3125vw, 0.625rem);
-  /* Space 2xs-xs: 6px → 15px */
-  --space-2xs-xs: clamp(0.375rem, 0.2946rem + 0.4018vw, 0.9375rem);
-  /* Space xs-s: 9px → 20px */
-  --space-xs-s: clamp(0.5625rem, 0.4643rem + 0.4911vw, 1.25rem);
-  /* Space s-m: 12px → 30px */
-  --space-s-m: clamp(0.75rem, 0.5893rem + 0.8036vw, 1.875rem);
-  /* Space m-l: 18px → 34px */
-  --space-m-l: clamp(1.125rem, 0.9821rem + 0.7143vw, 2.125rem);
-  /* Space l-xl: 20px → 40px */
-  --space-l-xl: clamp(1.25rem, 1.0714rem + 0.8929vw, 2.5rem);
-  /* Space xl-2xl: 24px → 54px */
-  --space-xl-2xl: clamp(1.5rem, 1.2321rem + 1.3393vw, 3.375rem);
-  /* Space 2xl-3xl: 32px → 66px */
-  --space-2xl-3xl: clamp(2rem, 1.6964rem + 1.5179vw, 4.125rem);
-  /* Space 3xl-4xl: 40px → 80px */
-  --space-3xl-4xl: clamp(2.5rem, 2.1429rem + 1.7857vw, 5rem);
-  /* Space 4xl-5xl: 48px → 100px */
-  --space-4xl-5xl: clamp(3rem, 2.5357rem + 2.3214vw, 6.25rem);
-  /* Space 5xl-6xl: 60px → 120px */
-  --space-5xl-6xl: clamp(3.75rem, 3.2143rem + 2.6786vw, 7.5rem);
+  /* Type Scale */
+  --display-lg-size: clamp(1.959rem, calc(1.577rem + 1.909vw), 3.008rem);
+  --display-lg-weight: 800;
+  --display-lg-line-height: 1.55;
+  --display-lg-letter-spacing: 0.015em;
 
-  /* Custom pairs */
-  /* Space s-l: 12px → 34px */
-  --space-s-l: clamp(0.75rem, 0.5536rem + 0.9821vw, 2.125rem);
+  --display-md-size: clamp(1.801rem, calc(1.502rem + 1.492vw), 2.622rem);
+  --display-md-weight: 800;
+  --display-md-line-height: 1.55;
+  --display-md-letter-spacing: 0.015em;
+
+  --h1-size: clamp(1.656rem, calc(1.427rem + 1.143vw), 2.284rem);
+  --h1-weight: 700;
+  --h1-line-height: 1.55;
+  --h1-letter-spacing: 0.02em;
+
+  --h2-size: clamp(1.399rem, calc(1.278rem + 0.609vw), 1.734rem);
+  --h2-weight: 600;
+  --h2-line-height: 1.55;
+  --h2-letter-spacing: 0.02em;
+
+  --h3-size: clamp(1.287rem, calc(1.205rem + 0.409vw), 1.511rem);
+  --h3-weight: 600;
+  --h3-line-height: 1.6;
+  --h3-letter-spacing: 0.025em;
+
+  --h4-size: clamp(1.183rem, calc(1.134rem + 0.244vw), 1.317rem);
+  --h4-weight: 500;
+  --h4-line-height: 1.6;
+  --h4-letter-spacing: 0.025em;
+
+  --h5-size: clamp(1.134rem, calc(1.1rem + 0.173vw), 1.229rem);
+  --h5-weight: 500;
+  --h5-line-height: 1.6;
+  --h5-letter-spacing: 0.03em;
+
+  --h6-size: clamp(1.088rem, calc(1.066rem + 0.109vw), 1.148rem);
+  --h6-weight: 500;
+  --h6-line-height: 1.6;
+  --h6-letter-spacing: 0.03em;
+
+  --body-xl-size: clamp(1.043rem, calc(1.033rem + 0.052vw), 1.071rem);
+  --body-xl-weight: 400;
+  --body-xl-line-height: 1.6;
+  --body-xl-letter-spacing: 0.03em;
+
+  --body-size: clamp(1rem, calc(1rem + 0vw), 1rem);
+  --body-weight: 400;
+  --body-line-height: 1.6;
+  --body-letter-spacing: 0.03em;
+
+  --body-sm-size: clamp(0.959rem, calc(0.968rem + -0.046vw), 0.933rem);
+  --body-sm-weight: 400;
+  --body-sm-line-height: 1.65;
+  --body-sm-letter-spacing: 0.03em;
+
+  --caption-lg-size: clamp(0.919rem, calc(0.937rem + -0.087vw), 0.871rem);
+  --caption-lg-weight: 400;
+  --caption-lg-line-height: 1.65;
+  --caption-lg-letter-spacing: 0.03em;
+
+  --caption-size: clamp(0.882rem, calc(0.906rem + -0.124vw), 0.813rem);
+  --caption-weight: 400;
+  --caption-line-height: 1.65;
+  --caption-letter-spacing: 0.03em;
+
+  --caption-sm-size: clamp(0.845rem, calc(0.877rem + -0.156vw), 0.759rem);
+  --caption-sm-weight: 300;
+  --caption-sm-line-height: 1.65;
+  --caption-sm-letter-spacing: 0.03em;
+
+  --overline-size: clamp(0.811rem, calc(0.848rem + -0.185vw), 0.709rem);
+  --overline-weight: 500;
+  --overline-line-height: 1.65;
+  --overline-letter-spacing: 0.03em;
 }
 
 /* Font sizes */
@@ -227,31 +275,60 @@ li,
 input,
 label,
 button {
-  font-size: var(--font-default);
+  font-size: var(--body-size);
+  font-weight: var(--body-weight);
+  line-height: var(--body-line-height);
+  letter-spacing: var(--body-letter-spacing);
 }
 
 h6 {
-  font-size: var(--space-m);
+  font-size: var(--h6-size);
+  font-weight: var(--h6-weight);
+  line-height: var(--h6-line-height);
+  letter-spacing: var(--h6-letter-spacing);
 }
 
 h5 {
-  font-size: var(--space-l);
+  font-size: var(--h5-size);
+  font-weight: var(--h5-weight);
+  line-height: var(--h5-line-height);
+  letter-spacing: var(--h5-letter-spacing);
 }
 
 h4 {
-  font-size: var(--space-xl);
+  font-size: var(--h4-size);
+  font-weight: var(--h4-weight);
+  line-height: var(--h4-line-height);
+  letter-spacing: var(--h4-letter-spacing);
 }
 
 h3 {
-  font-size: var(--space-2xl);
+  font-size: var(--h3-size);
+  font-weight: var(--h3-weight);
+  line-height: var(--h3-line-height);
+  letter-spacing: var(--h3-letter-spacing);
 }
 
 h2 {
-  font-size: calc(var(--space-2xl) * var(--font-size-adjust));
+  font-size: var(--h2-size);
+  font-weight: var(--h2-weight);
+  line-height: var(--h2-line-height);
+  letter-spacing: var(--h2-letter-spacing);
 }
 
 h1 {
-  font-size: calc(var(--space-3xl) * var(--font-size-adjust));
+  font-size: var(--h1-size);
+  font-weight: var(--h1-weight);
+  line-height: var(--h1-line-height);
+  letter-spacing: var(--h1-letter-spacing);
+}
+
+caption {
+  font-size: var(--caption-size);
+  font-weight: var(--caption-weight);
+  line-height: var(--caption-line-height);
+  letter-spacing: var(--caption-letter-spacing);
+  text-transform: uppercase;
 }
 
 button {

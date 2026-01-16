@@ -1,16 +1,10 @@
-.settingsForm {
-  position: relative;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.settingWrapper {
+.inputWrapper {
   margin: var(--space-s) var(--space-xs);
   display: flex;
   gap: var(--space-xs);
   align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .formControls {

@@ -73,6 +73,17 @@ export default function GameOfLife() {
     }
   }, [gameBoard, refreshBoards]);
 
+  const handleRandomizeBoard = useCallback(
+    (seed: number) => {
+      if (gameBoard) {
+        gameBoard.RandomizeGameBoard(seed);
+        refreshBoards();
+        setRefreshCount((prev) => prev + 1);
+      }
+    },
+    [gameBoard, refreshBoards]
+  );
+
   const handleRunGame = () => {
     setRunning(true);
   };
@@ -159,6 +170,7 @@ export default function GameOfLife() {
             <MenuBar
               settings={settings}
               onSettingsChange={updateGameSettings}
+              onRandomize={handleRandomizeBoard}
             />
             <div className={styles.gameBoard}>
               <DrawingPanel
