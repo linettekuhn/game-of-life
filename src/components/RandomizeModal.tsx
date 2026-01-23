@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Modal from "./Modal";
-import styles from "./RandomizeModal.module.css";
+import styles from "./styles/RandomizeModal.module.css";
 import TextButton from "./TextButton";
 
 type Props = {

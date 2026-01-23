@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { GameBoard } from "../GameOfLifeModule";
-import styles from "./GameStatus.module.css";
+import styles from "./styles/GameStatus.module.css";
 
 type Props = {
   gameBoard: GameBoard | null;

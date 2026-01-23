@@ -8,7 +8,7 @@ import { IoMdPlay } from "react-icons/io";
 import { IoMdSkipForward } from "react-icons/io";
 import { IoMdTrash } from "react-icons/io";
 import IconButton from "./IconButton";
-import styles from "./GameOfLife.module.css";
+import styles from "./styles/GameOfLife.module.css";
 import MenuBar from "./MenuBar";
 import TextButton from "./TextButton";
 

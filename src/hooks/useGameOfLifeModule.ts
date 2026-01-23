@@ -23,7 +23,8 @@ export const useGameOfLifeModule = () => {
 
         // create <script> tag to load js file
         script = document.createElement("script");
-        script.src = "/GameOfLifeModule.js";
+        const baseUrl = import.meta.env.BASE_URL;
+        script.src = `${baseUrl}GameOfLifeModule.js`;
         script.async = true;
 
         script.onload = async () => {

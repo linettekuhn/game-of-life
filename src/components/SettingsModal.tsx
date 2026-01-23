@@ -1,6 +1,6 @@
 import tinycolor from "tinycolor2";
 import type { GameSettings } from "../GameOfLifeModule";
-import styles from "./SettingsModal.module.css";
+import styles from "./styles/SettingsModal.module.css";
 import { useState } from "react";
 import Modal from "./Modal";
 import TextButton from "./TextButton";

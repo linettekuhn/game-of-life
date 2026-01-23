@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "./MenuBar.module.css";
+import styles from "./styles/MenuBar.module.css";
 import { IoMdArrowDropright, IoMdCheckmark } from "react-icons/io";
 import type { MenuItem } from "../types";
 import type { GameSettings } from "../GameOfLifeModule";

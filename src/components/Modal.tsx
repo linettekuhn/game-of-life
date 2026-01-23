@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import styles from "./Modal.module.css";
+import styles from "./styles/Modal.module.css";
 import IconButton from "./IconButton";
 import { IoMdClose } from "react-icons/io";
 

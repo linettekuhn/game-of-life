@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import styles from "./TextButton.module.css";
+import styles from "./styles/TextButton.module.css";
 import type { PropsWithChildren } from "react";
 
 type Props = {

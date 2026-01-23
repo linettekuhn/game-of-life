@@ -8,7 +8,10 @@ export default defineConfig({
   base: "/game-of-life/",
   resolve: {
     alias: {
-      GameOfLifeModule: path.resolve(__dirname, "./GameOfLifeModule.js"),
+      GameOfLifeModule: path.resolve(
+        __dirname,
+        "game-of-life/GameOfLifeModule.js",
+      ),
     },
   },
 });

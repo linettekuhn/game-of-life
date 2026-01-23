@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import type { GameSettings, Size } from "../GameOfLifeModule";
 import tinycolor from "tinycolor2";
-import styles from "./DrawingPanel.module.css";
+import styles from "./styles/DrawingPanel.module.css";
 import DraggableContainer from "./DraggableContainer";
 
 type Props = {
