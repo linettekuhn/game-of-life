@@ -10,6 +10,7 @@ import { IoMdTrash } from "react-icons/io";
 import IconButton from "./IconButton";
 import styles from "./GameOfLife.module.css";
 import MenuBar from "./MenuBar";
+import TextButton from "./TextButton";
 
 export default function GameOfLife() {
   const { module, loading, error } = useGameOfLifeModule();
@@ -102,6 +103,7 @@ export default function GameOfLife() {
   };
 
   const initializeBoard = () => {
+    setRunning(false);
     if (module) {
       const board = new module.GameBoard();
       board.InitializeGameBoard();
@@ -162,8 +164,20 @@ export default function GameOfLife() {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div>
-      <button onClick={initializeBoard}>start game</button>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: "2rem",
+      }}
+    >
+      {gameBoard ? (
+        <TextButton onClick={initializeBoard}>Reset Game of Life</TextButton>
+      ) : (
+        <TextButton onClick={initializeBoard}>Start Game of Life</TextButton>
+      )}
       {gameBoard && settings && (
         <div className={styles.gameWindow}>
           <div className={styles.gameBoardWrapper}>
