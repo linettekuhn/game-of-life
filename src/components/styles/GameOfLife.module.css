@@ -1,0 +1,56 @@
+.gameWindow {
+  gap: var(--space-s);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-s);
+}
+
+.gameBoardWrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  max-height: 1000px;
+}
+
+.gameBoard {
+  overflow: hidden;
+  resize: none;
+
+  min-width: 375px;
+  min-height: 350px;
+
+  max-width: 100%;
+  max-height: 100%;
+
+  width: 375px;
+  height: 350px;
+  border: 1px solid black;
+
+  display: flex; /* Add this */
+  flex-direction: column;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+}
+
+@media (min-width: 700px) and (max-width: 1119px) {
+  .gameBoard {
+    min-width: 450px;
+    width: 450px;
+    height: 400px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .gameBoard {
+    resize: both;
+    min-width: 450px;
+    width: 500px;
+    height: 450px;
+  }
+}

@@ -1,0 +1,17 @@
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path from "path";
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  base: "/game-of-life/",
+  resolve: {
+    alias: {
+      GameOfLifeModule: path.resolve(
+        __dirname,
+        "game-of-life/GameOfLifeModule.js",
+      ),
+    },
+  },
+});

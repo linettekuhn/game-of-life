@@ -1,0 +1,16 @@
+.inputWrapper {
+  margin: var(--space-s) var(--space-xs);
+  display: flex;
+  gap: var(--space-xs);
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.formControls {
+  display: flex;
+  gap: var(--space-xs);
+  width: 100%;
+  justify-content: space-evenly;
+  padding: var(--space-2xs);
+}
