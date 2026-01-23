@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import type { IconType } from "react-icons";
 
 export default function IconButton({
@@ -8,7 +9,7 @@ export default function IconButton({
   onClick: () => void;
 }) {
   return (
-    <button
+    <motion.button
       style={{
         display: "flex",
         placeContent: "center",
@@ -16,8 +17,10 @@ export default function IconButton({
         padding: 16,
       }}
       onClick={onClick}
+      whileHover={{ scale: 1.05, cursor: "pointer" }}
+      whileTap={{ scale: 0.95 }}
     >
       <IconComponent style={{ fontSize: "16px" }} />
-    </button>
+    </motion.button>
   );
 }
