@@ -9,7 +9,7 @@ It allows users to explore cellular automaton behavior in real time while showca
 
 [👉 Click here to see live demo](https://linettekuhn.github.io/game-of-life/)
 
-![Game of Life Preview](/game_of_life_preview.gif)
+![Game of Life Preview](docs/assets/game_of_life_preview.gif)
 
 ---
 
