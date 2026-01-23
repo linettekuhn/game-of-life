@@ -159,7 +159,8 @@ export default function GameOfLife() {
     };
   }, [isRunning, handleNextGeneration, settings?.interval]);
 
-  if (!module) return <div>Module not loaded</div>;
+  if (!module)
+    return <div>Module not loaded. Please use a supported browser.</div>;
   if (loading) return <div>Loading Game of Life...</div>;
   if (error) return <div>Error: {error}</div>;
 
