@@ -5,6 +5,7 @@ import path from "path";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: "/game-of-life/",
   resolve: {
     alias: {
       GameOfLifeModule: path.resolve(__dirname, "./GameOfLifeModule.js"),
