@@ -17,7 +17,7 @@ export default function GameOfLife() {
   const [settings, setSettings] = useState<GameSettings | null>(null);
   const [flatBoard, setFlatBoard] = useState<Uint8Array>(new Uint8Array(0));
   const [flatNeighbors, setFlatNeighbors] = useState<Int32Array>(
-    new Int32Array(0)
+    new Int32Array(0),
   );
   const [isRunning, setRunning] = useState(false);
   const [refreshCount, setRefreshCount] = useState(0);
@@ -38,7 +38,7 @@ export default function GameOfLife() {
       const neighbors = new Int32Array(
         module.HEAP32.buffer,
         neighborPointer,
-        size
+        size,
       );
       setFlatNeighbors(new Int32Array(neighbors)); // copy it for local state
     }
@@ -81,7 +81,7 @@ export default function GameOfLife() {
         setRefreshCount((prev) => prev + 1);
       }
     },
-    [gameBoard, refreshBoards]
+    [gameBoard, refreshBoards],
   );
 
   const handleRunGame = () => {
@@ -121,7 +121,7 @@ export default function GameOfLife() {
       const neighborData = new Int32Array(
         module.HEAP32.buffer,
         neighborPointer,
-        size
+        size,
       );
       setFlatNeighbors(new Int32Array(neighborData)); // copy it for local state
     }

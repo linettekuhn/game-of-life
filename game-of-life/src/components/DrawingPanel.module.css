@@ -1,0 +1,16 @@
+.hudWrapper {
+  background-color: rgb(204, 252, 236);
+  padding: var(--space-xs) var(--space-s);
+  border-radius: var(--space-s);
+  border: 1px solid rgb(17, 185, 129);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.canvasWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}

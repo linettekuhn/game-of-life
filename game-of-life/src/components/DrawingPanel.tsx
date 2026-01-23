@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import type { GameSettings, Size } from "../GameOfLifeModule";
 import tinycolor from "tinycolor2";
+import styles from "./DrawingPanel.module.css";
+import DraggableContainer from "./DraggableContainer";
 
 type Props = {
   gameBoard: Uint8Array;
@@ -102,7 +104,6 @@ export default function DrawingPanel({
     const cellWidth = canvasSize.width / settings.gridSize;
     const cellHeight = canvasSize.height / settings.gridSize;
 
-    // TODO: store these in settings
     const livingCellColor = tinycolor({
       r: settings.livingCellRed,
       g: settings.livingCellGreen,
@@ -136,7 +137,7 @@ export default function DrawingPanel({
         // set stroke color for grid lines
         if (settings.showGrid) {
           ctx.strokeStyle = gridLineColor;
-          ctx.lineWidth = 1;
+          ctx.lineWidth = 0.3;
         } else {
           ctx.strokeStyle = isAlive ? livingCellColor : deadCellColor;
         }
@@ -146,22 +147,22 @@ export default function DrawingPanel({
           i * cellWidth,
           j * cellHeight,
           cellWidth + 1,
-          cellHeight + 1
+          cellHeight + 1,
         );
         ctx.strokeRect(
           i * cellWidth,
           j * cellHeight,
           cellWidth + 1,
-          cellHeight + 1
+          cellHeight + 1,
         );
 
         // show neighbor count if enabled
         if (settings.showNeighborCount) {
           const neighbors = neighborCounts[flatIndex];
           if (neighbors > 0) {
-            const fontSize = Math.min(cellWidth, cellHeight) / 2;
-            ctx.font = `${fontSize}px Arial`;
-            ctx.fillStyle = "red";
+            const fontSize = Math.min(cellWidth, cellHeight) * 0.6;
+            ctx.font = `${fontSize}px Onest`;
+            ctx.fillStyle = "black";
 
             const text = neighbors.toString();
             const metrics = ctx.measureText(text);
@@ -181,7 +182,7 @@ export default function DrawingPanel({
     if (settings.showThickGrid) {
       const solidLines = Math.floor(settings.gridSize / 10);
       ctx.strokeStyle = gridLineColor;
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 1;
 
       for (let i = 1; i <= solidLines; i++) {
         // vertical lines
@@ -197,45 +198,42 @@ export default function DrawingPanel({
         ctx.stroke();
       }
     }
-
-    // display HUD if enabled
-    if (settings.showHUD) {
-      const fontSize = Math.min(canvasSize.width, canvasSize.height) / 35;
-      ctx.font = `${fontSize}px Arial`;
-      ctx.fillStyle = "red";
-
-      const hudText = [
-        `Boundary type: ${settings.isToroidal ? "Toroidal" : "Finite"}`,
-        `Game Board Size: ${settings.gridSize} x ${settings.gridSize}`,
-        `Timer Interval: ${settings.interval} ms`,
-      ];
-
-      const lineHeight = fontSize * 1.2;
-      const totalHeight = hudText.length * lineHeight;
-
-      hudText.forEach((line, index) => {
-        ctx.fillText(
-          line,
-          10,
-          canvasSize.height - totalHeight + index * lineHeight
-        );
-      });
-    }
   }, [gameBoard, neighborCounts, settings, canvasSize]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={canvasSize.width}
-      height={canvasSize.height}
-      onMouseUp={handleMouseUp}
-      style={{
-        display: "block",
-        cursor: "pointer",
-        backgroundColor: "#ffffff",
-        width: "100%",
-        height: "100%",
-      }}
-    />
+    <div className={styles.canvasWrapper}>
+      <canvas
+        ref={canvasRef}
+        width={canvasSize.width}
+        height={canvasSize.height}
+        onMouseUp={handleMouseUp}
+        style={{
+          display: "block",
+          cursor: "pointer",
+          backgroundColor: "#ffffff",
+          width: "100%",
+          height: "100%",
+        }}
+      />
+      {/* display HUD if enabled */}
+      {settings.showHUD && (
+        <DraggableContainer parentRef={canvasRef}>
+          <div className={styles.hudWrapper}>
+            <p>
+              <span className="bold">Boundary type:</span>{" "}
+              {settings.isToroidal ? "Toroidal" : "Finite"}
+            </p>
+            <p>
+              <span className="bold">Game Board Size:</span> {settings.gridSize}{" "}
+              x {settings.gridSize}
+            </p>
+            <p>
+              <span className="bold">Timer Interval:</span> {settings.interval}{" "}
+              ms
+            </p>
+          </div>
+        </DraggableContainer>
+      )}
+    </div>
   );
 }

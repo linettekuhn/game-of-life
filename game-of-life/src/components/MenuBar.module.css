@@ -12,6 +12,7 @@
 
 .menuWrapper {
   position: relative;
+  z-index: 100;
 }
 
 .menu {
