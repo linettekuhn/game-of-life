@@ -26,6 +26,8 @@
 @media (min-width: 1200px) {
   .main {
     flex-direction: row;
+    align-items: center;
     width: 100%;
+    height: 100vh;
   }
 }
