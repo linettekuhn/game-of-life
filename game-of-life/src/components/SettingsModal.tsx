@@ -3,6 +3,7 @@ import type { GameSettings } from "../GameOfLifeModule";
 import styles from "./SettingsModal.module.css";
 import { useState } from "react";
 import Modal from "./Modal";
+import TextButton from "./TextButton";
 type Props = {
   onSave: (newSettings: GameSettings) => void;
   onCancel: () => void;
@@ -50,7 +51,7 @@ export default function SettingsModal({ onSave, onCancel, settings }: Props) {
   const [interval, setInterval] = useState(settings.interval);
 
   const saveSettings = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault();
     const newSettings: GameSettings = {
@@ -75,8 +76,8 @@ export default function SettingsModal({ onSave, onCancel, settings }: Props) {
 
   const footer = (
     <div className={styles.formControls}>
-      <button onClick={saveSettings}>Save</button>
-      <button onClick={onCancel}>Cancel</button>
+      <TextButton onClick={saveSettings}>Save</TextButton>
+      <TextButton onClick={onCancel}>Cancel</TextButton>
     </div>
   );
 
@@ -97,7 +98,7 @@ export default function SettingsModal({ onSave, onCancel, settings }: Props) {
               livingCellColor.r,
               livingCellColor.g,
               livingCellColor.b,
-              livingCellColor.a
+              livingCellColor.a,
             )}
             onChange={(e) =>
               setLivingCellColor(hexStringToRGBA(e.target.value))
@@ -115,7 +116,7 @@ export default function SettingsModal({ onSave, onCancel, settings }: Props) {
               deadCellColor.r,
               deadCellColor.g,
               deadCellColor.b,
-              deadCellColor.a
+              deadCellColor.a,
             )}
             onChange={(e) => setDeadCellColor(hexStringToRGBA(e.target.value))}
             required
@@ -131,7 +132,7 @@ export default function SettingsModal({ onSave, onCancel, settings }: Props) {
               gridLineColor.r,
               gridLineColor.g,
               gridLineColor.b,
-              gridLineColor.a
+              gridLineColor.a,
             )}
             onChange={(e) => setGridLineColor(hexStringToRGBA(e.target.value))}
             required

@@ -152,7 +152,7 @@ export default function MenuBar({
   const renderMenuItem = (
     menuItem: MenuItem,
     index: number,
-    isSubMenu = false
+    isSubMenu = false,
   ) => {
     const hasSubmenu = menuItem.type === "submenu";
     const isActive = hoveredSubmenu === index;
@@ -182,7 +182,7 @@ export default function MenuBar({
         {hasSubmenu && isActive && menuItem.submenu && (
           <div className={styles.subMenuItemsWrapper}>
             {menuItem.submenu.map((subItem, subIndex) =>
-              renderMenuItem(subItem, subIndex, true)
+              renderMenuItem(subItem, subIndex, true),
             )}
           </div>
         )}
@@ -190,9 +190,14 @@ export default function MenuBar({
     );
   };
 
+  const handleMouseLeaveMenu = () => {
+    setActiveMenu(null);
+    setHoveredSubmenu(null);
+  };
+
   return (
     <div ref={menuRef} className={styles.menuBar}>
-      <div className={styles.menus}>
+      <div className={styles.menus} onMouseLeave={handleMouseLeaveMenu}>
         {Object.keys(menuItems).map((menuName) => (
           <div key={menuName} className={styles.menuWrapper}>
             <button
@@ -206,7 +211,7 @@ export default function MenuBar({
             {activeMenu === menuName && (
               <div className={styles.menuItemsWrapper}>
                 {menuItems[menuName].map((item, idx) =>
-                  renderMenuItem(item, idx)
+                  renderMenuItem(item, idx),
                 )}
               </div>
             )}

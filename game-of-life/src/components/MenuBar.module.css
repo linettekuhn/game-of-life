@@ -18,6 +18,12 @@
 .menu {
   padding: var(--space-3xs) var(--space-s);
   text-align: start;
+  background-color: white;
+}
+
+.menu:hover,
+.menuItem:hover {
+  cursor: pointer;
 }
 
 .menuItemsWrapper,
@@ -27,7 +33,6 @@
   flex-direction: column;
   align-items: start;
   width: max-content;
-  background-color: white;
 }
 
 .menuItemWrapper {

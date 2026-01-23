@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Modal from "./Modal";
 import styles from "./RandomizeModal.module.css";
+import TextButton from "./TextButton";
 
 type Props = {
   onRandomize: (seed: number) => void;
@@ -11,8 +12,8 @@ export default function RandomizeModal({ onRandomize, onCancel }: Props) {
   const [seed, setSeed] = useState(() => Math.floor(Date.now() / 1000));
   const footer = (
     <div className={styles.formControls}>
-      <button onClick={() => onRandomize(seed)}>Randomize</button>
-      <button onClick={onCancel}>Cancel</button>
+      <TextButton onClick={() => onRandomize(seed)}>Randomize</TextButton>
+      <TextButton onClick={onCancel}>Cancel</TextButton>
     </div>
   );
   return (

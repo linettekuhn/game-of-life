@@ -3,7 +3,7 @@ import styles from "./TextButton.module.css";
 import type { PropsWithChildren } from "react";
 
 type Props = {
-  onClick: () => void;
+  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 export default function TextButton({
   onClick,
