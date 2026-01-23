@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://linettekuhn.github.io/game-of-life/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
